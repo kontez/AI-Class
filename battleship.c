@@ -137,6 +137,8 @@ int main( int argc, char *argv[] )
                                     else if ((board[k][y] == 0) && (k >= 0)) /* if water */
                                     {
                                         board[k][y] = -1;
+                                        board[k][y+1] = -3;
+                                        board[k][y-1] = -3;
                                         shots++;
                                     }
                                     k--;
@@ -146,6 +148,8 @@ int main( int argc, char *argv[] )
                             {
                                 /* miss and attack down */
                                 board[x-1][y] = -1;
+                                board[x-1][y-1] = -3;
+                                board[x-1][y+1] = -3;
                                 shots++;
                                 if ( (board[x+1][y] == 1) && ((x+1) < 10)) /* if ship */
                                 {
@@ -164,12 +168,14 @@ int main( int argc, char *argv[] )
                                         else if ((board[k][y] == 0) && (k < 10)) /* if water */
                                         {
                                             board[k][y] = -1;
+                                            board[k][y+1] = -3;
+                                            board[k][y-1] = -3;
                                             shots++;
                                         }
                                         k++;
                                     } while ((board[k][y] == 1) && (k < 10));                                 
                                 }
-                                else if ( (board[x+1][y] == 0) && (x < 10))/* if miss, change direction */
+                                else /*if ( (board[x+1][y] == 0) && ((x+1) < 10))/* if miss, change direction */
                                 {
                                     /* miss */
                                     board[x+1][y] = -1;
@@ -198,6 +204,8 @@ int main( int argc, char *argv[] )
                                     else if ((board[x][k] == 0) && (k >= 0)) /* if water */
                                     {
                                         board[x][k] = -1;
+                                        board[x-1][k] = -3;
+                                        board[x+1][k] = -3;
                                         shots++;
                                     }
                                     k--;
@@ -207,8 +215,11 @@ int main( int argc, char *argv[] )
                             {
                                 /* miss and attack right */
                                 board[x][y-1] = -1;
+                                board[x+1][y-1] = -3;
+                                board[x+1][y-1] = -3;
                                 shots++;
-                                if ( (board[x][y+1] == 1) && (y < 10)) /* attack right */
+
+                                if ( (board[x][y+1] == 1) && ((y+1) < 10)) /* attack right */
                                 {
                                     board[x][y+1] = -2;
                                     ships++;
@@ -229,7 +240,7 @@ int main( int argc, char *argv[] )
                                         k++;
                                     } while ((board[x][k] == 1) && (k < 10));                                 
                                 }
-                                else if ( (board[x][y+1] == 0) && (y < 10))
+                                else /*if ( (board[x][y+1] == 0) && ((y+1) < 10))*/
                                 {
                                     /* miss */
                                     board[x][y+1] = -1;
@@ -257,7 +268,7 @@ int main( int argc, char *argv[] )
 
     /* reprint the board for debugging */
     printf("board after attack: \n");
-    printf("[ 0 -> water | -1 -> miss | -2 -> hit ]\n");
+    printf("[ 0 -> water | -1 -> miss | -2 -> hit | -3 -> ignored ]\n");
     for (i = 0; i < 10; i++)
     {
         printf("\n");
