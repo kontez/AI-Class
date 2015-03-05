@@ -11,7 +11,7 @@
  * USAGE:
  * The program wants to be fed with a file 
  * that contains 14 coordinates with no spaces
- * (e.g. B5B6B7B8B9C3D3E3F3F7G7H7J7J8 
+ * (e.g. B5B6B7B8B9C3D3E3F3F7G7H7J7J8 )
  * 
  * then you can compile it with:
  * gcc battleship.c -o battleship
@@ -175,14 +175,15 @@ int main( int argc, char *argv[] )
                                         k++;
                                     } while ((board[k][y] == 1) && (k < 10));                                 
                                 }
-                                else /*if ( (board[x+1][y] == 0) && ((x+1) < 10))/* if miss, change direction */
-                                {
+                                //else /*if ( (board[x+1][y] == 0) && ((x+1) < 10))/* if miss, change direction */
+                                //{
                                     /* miss */
-                                    board[x+1][y] = -1;
-                                    shots++;
-                                    dir = 0;
-                                }
+                                //    board[x+1][y] = -1;
+                                //    shots++;
+                                //    dir = 0;
+                                //}
                             }
+                            dir = 0;
                         }
 
                         else if (dir == 0) /* horizontal */
@@ -240,14 +241,15 @@ int main( int argc, char *argv[] )
                                         k++;
                                     } while ((board[x][k] == 1) && (k < 10));                                 
                                 }
-                                else /*if ( (board[x][y+1] == 0) && ((y+1) < 10))*/
-                                {
+                                //else /*if ( (board[x][y+1] == 0) && ((y+1) < 10))*/
+                                //{
                                     /* miss */
-                                    board[x][y+1] = -1;
-                                    shots++;
-                                    dir = 1;
-                                }
-                            }
+                                //    board[x][y+1] = -1;
+                                //    shots++;
+                                //    dir = 1;
+                                //}
+                            } 
+                            dir = 1;
                         }
                     }
                 }
@@ -280,3 +282,4 @@ int main( int argc, char *argv[] )
 
     printf("\nshots: %d\n",shots);
 }
+
